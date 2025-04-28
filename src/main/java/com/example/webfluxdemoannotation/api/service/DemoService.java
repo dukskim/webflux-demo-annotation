@@ -82,7 +82,6 @@ public class DemoService {
         Flux.map()은 각 항목을 처리하지만, collectList() 이후의 .map()은 전체 데이터를 한 번에 처리하는 방식이 됩니다.
          */
         return demoTestRepository.findCustomByCondition(aaa, bbb)
-                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "DemoTest not found")))
                 .map(data -> DemoDataResponse.builder().aaa(data.getAaa()).bbb(data.getBbb()).build())
                 .collectList()
                 .map(data -> DemoDataListResponse.builder().dataList(data).build())
