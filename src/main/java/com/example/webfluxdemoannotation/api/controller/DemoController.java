@@ -44,4 +44,17 @@ public class DemoController {
                 .map(data -> ResponseEntity.ok(new SingleResponse<>(data)));
     }
 
+    @GetMapping("/api/v1/demo/dbdata-query")
+    public Mono<ResponseEntity<SingleResponse<DemoDataResponse>>> demoDbQueryData(
+            @RequestParam(value = "aaa", required = true) String aaa) {
+        return demoService.demoDbDataQuery(DemoDataRequest.builder().aaa(aaa).build())
+                .map(data -> ResponseEntity.ok(new SingleResponse<>(data)));
+    }
+
+    @GetMapping("/api/v1/demo/dbdata-custom-query")
+    public Mono<ResponseEntity<SingleResponse<DemoDataResponse>>> demoDbCustomQueryData(
+            @RequestParam(value = "aaa", required = true) String aaa) {
+        return demoService.demoDbDataCustomQuery(DemoDataRequest.builder().aaa(aaa).build())
+                .map(data -> ResponseEntity.ok(new SingleResponse<>(data)));
+    }
 }
