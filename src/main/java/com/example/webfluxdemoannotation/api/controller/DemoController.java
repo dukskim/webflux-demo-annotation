@@ -1,6 +1,7 @@
 package com.example.webfluxdemoannotation.api.controller;
 
 import com.example.webfluxdemoannotation.api.dto.request.DemoDataRequest;
+import com.example.webfluxdemoannotation.api.dto.response.DemoDataListResponse;
 import com.example.webfluxdemoannotation.api.dto.response.DemoDataResponse;
 import com.example.webfluxdemoannotation.api.service.DemoService;
 import com.example.webfluxdemoannotation.base.dto.SingleResponse;
@@ -55,6 +56,14 @@ public class DemoController {
     public Mono<ResponseEntity<SingleResponse<DemoDataResponse>>> demoDbCustomQueryData(
             @RequestParam(value = "aaa", required = true) String aaa) {
         return demoService.demoDbDataCustomQuery(DemoDataRequest.builder().aaa(aaa).build())
+                .map(data -> ResponseEntity.ok(new SingleResponse<>(data)));
+    }
+
+    @GetMapping("/api/v1/demo/dbdata-custom-query-2")
+    public Mono<ResponseEntity<SingleResponse<DemoDataListResponse>>> demoDbCustomQueryData(
+            @RequestParam(value = "aaa", required = false) String aaa,
+            @RequestParam(value = "bbb", required = false) String bbb) {
+        return demoService.demoDbDataCustomQuery2(aaa, bbb)
                 .map(data -> ResponseEntity.ok(new SingleResponse<>(data)));
     }
 }
