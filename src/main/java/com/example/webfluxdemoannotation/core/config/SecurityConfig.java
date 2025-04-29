@@ -1,4 +1,4 @@
-package com.example.webfluxdemoannotation.config;
+package com.example.webfluxdemoannotation.core.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
