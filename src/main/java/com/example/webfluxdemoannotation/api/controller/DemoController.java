@@ -103,6 +103,7 @@ public class DemoController {
 
     @GetMapping("/api/v1/demo/custom-exception")
     public Mono<ResponseEntity<ApiResult<DemoDataResponse>>> demoCustomException() {
+        log.debug("CustomException 예외처리 예제AA");
         if (true) {
             //throw new CustomException(ErrorCode.SYSTEM_ERROR_ADM.getCode());
             //throw new CustomException(ErrorCode.REQUIRED_VALUE.getCode(), new String[]{"aaa"});

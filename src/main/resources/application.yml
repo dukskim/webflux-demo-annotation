@@ -7,3 +7,11 @@ spring:
     password: root
     pool:
       enabled: false
+
+logging:
+  level:
+    root: INFO
+    com.example.webfluxdemoannotation: DEBUG # 패키지 로그
+    org.springframework.r2dbc.core: DEBUG # Spring R2DBC가 실행하는 SQL 로그
+    io.r2dbc.spi.ConnectionFactory: DEBUG # SQL 로그 출력을 위해 사용하는 ConnectionFactory wrapping 로그
+    dev.miku.r2dbc.mysql: DEBUG # R2DBC MySQL 드라이버 로그
