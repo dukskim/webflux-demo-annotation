@@ -6,6 +6,8 @@ import com.example.webfluxdemoannotation.api.dto.response.DemoDataListResponse;
 import com.example.webfluxdemoannotation.api.dto.response.DemoDataResponse;
 import com.example.webfluxdemoannotation.api.service.DemoService;
 import com.example.webfluxdemoannotation.base.dto.ApiResult;
+import com.example.webfluxdemoannotation.base.enums.ErrorCode;
+import com.example.webfluxdemoannotation.core.exception.CustomException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -97,5 +99,22 @@ public class DemoController {
     public Mono<ResponseEntity<ApiResult<DemoDataResponse>>> demoValidData3(@Valid DemoValidTestRequest demoValidTestRequest) {
         log.info("data:::::{}", demoValidTestRequest.toString());
         return Mono.just(ResponseEntity.ok(new ApiResult<>(DemoDataResponse.builder().aaa(demoValidTestRequest.getAaa()).bbb(demoValidTestRequest.getBbb()).build())));
+    }
+
+    @GetMapping("/api/v1/demo/custom-exception")
+    public Mono<ResponseEntity<ApiResult<DemoDataResponse>>> demoCustomException() {
+        if (true) {
+            //throw new CustomException(ErrorCode.SYSTEM_ERROR_ADM.getCode());
+            //throw new CustomException(ErrorCode.REQUIRED_VALUE.getCode(), new String[]{"aaa"});
+            //throw new CustomException(ErrorCode.NOT_ENOUGH_CHARACTERS_SIZE.getCode(), new String[]{"aaa", "2"});
+            //return Mono.error(new CustomException(ErrorCode.NOT_ENOUGH_CHARACTERS_SIZE.getCode(), new String[]{"aaa", "2"}));
+            //return Mono.error(new CustomException(ErrorCode.SYSTEM_ERROR_ADM.getCode(), "에러당"));
+            //return Mono.error(new CustomException(ErrorCode.SYSTEM_ERROR_ADM.getCode(), "error.A0001"));
+            //return Mono.error(new CustomException("AAAA", "error.A0001"));
+            //return Mono.error(new CustomException("BBBB", "error.A2002", new String[]{"aaa", "2"}));
+            //return Mono.error(new CustomException());
+            return Mono.error(new CustomException(ErrorCode.SYSTEM_ERROR_ADM.getCode()));
+        }
+        return Mono.just(ResponseEntity.ok(new ApiResult<>(DemoDataResponse.builder().aaa("a").bbb("b").build())));
     }
 }
